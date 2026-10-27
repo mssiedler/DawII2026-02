@@ -16,10 +16,11 @@
             <td>Ações</td>
         </tr>
       
-        <%for (const {id, nome, matricula} of Alunos) {%>
+        <%for (const {id, nome, matricula,curso} of Alunos) {%>
         <tr>
             <td><%=nome%></td>
             <td><%=matricula%></td>
+            <td><%= curso?.nome || 'Sem curso' %></td>
             <td><a href="/aluno/edt/<%=id%>">Editar</a>
             <a href="/aluno/del/<%=id%>">Excluir</a></td>
         </tr>

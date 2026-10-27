@@ -1,5 +1,6 @@
 //importar o Model
 import Aluno from '../models/aluno.js'
+import Curso from '../models/curso.js'
 
 export default class AlunoController{
 
@@ -11,15 +12,16 @@ export default class AlunoController{
         }
         this.add = async(req, res)=>{
             //cria o Aluno
-           
+           const curso = await Curso.findOne(); 
             await Aluno.create({
                 nome: req.body.nome,
-                matricula:req.body.matricula
+                matricula:req.body.matricula,
+                curso: curso
             });
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
-            const resultado = await Aluno.find({})
+            const resultado = await Aluno.find({}).populate('curso')
             res.render(caminhoBase + 'lst', {Alunos:resultado})
         }
         this.find = async(req, res)=>{
